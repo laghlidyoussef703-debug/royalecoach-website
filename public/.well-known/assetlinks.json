@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.royalecoach.app",
+      "sha256_cert_fingerprints": [
+        "48:F3:ED:B1:F1:15:D2:67:47:0A:99:B2:F5:0F:54:5D:18:5A:16:5A:86:02:0A:10:18:27:73:63:DF:09:E8:99"
+      ]
+    }
+  }
+]

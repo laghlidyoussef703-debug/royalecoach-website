@@ -1,0 +1,20 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": ["7AN6F6499H.com.royalecoach.app"],
+        "components": [
+          {
+            "/": "/open",
+            "comment": "Open RoyaleCoach AI after referral clipboard preparation"
+          },
+          {
+            "/": "/u/*",
+            "comment": "RoyaleCoach AI referral invite links"
+          }
+        ]
+      }
+    ]
+  }
+}

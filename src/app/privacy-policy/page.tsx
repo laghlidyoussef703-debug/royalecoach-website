@@ -1,221 +1,220 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
-import { LegalPageLayout } from '@/components/ui/LegalPageLayout';
+import type { ReactNode } from 'react';
 import { buildMeta } from '@/lib/metadata';
 
 export const metadata: Metadata = buildMeta({
-  title: 'Privacy Policy — RoyaleCoach AI Clash Royale Coaching App',
+  title: 'Privacy Policy — RoyaleCoach AI',
   description:
-    "Read RoyaleCoach AI's Privacy Policy. Learn what data we collect from Clash Royale player tags, how we use it, and your rights as a user.",
+    "Read RoyaleCoach AI's Privacy Policy. Learn what data we process, how anonymous and linked sessions work, how long data is retained, and your rights.",
   path: '/privacy-policy',
 });
 
+const LAST_UPDATED = 'July 10, 2026';
+
+function SectionCard({
+  number,
+  title,
+  children,
+  prominent = false,
+}: {
+  number: string;
+  title: string;
+  children: ReactNode;
+  prominent?: boolean;
+}) {
+  return (
+    <section className={`rounded-[22px] border bg-white p-6 shadow-[0_16px_38px_rgba(11,23,48,0.08)] md:p-8 ${prominent ? 'border-[#1565FF]/30 ring-2 ring-[#1565FF]/10' : 'border-[#E6EDF8]'}`}>
+      <div className="mb-5 flex items-center gap-3">
+        <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-[#1565FF] font-['Clash'] text-sm text-white">
+          {number}
+        </span>
+        <h2 className="font-['Clash'] text-[25px] leading-tight text-[#0D1B2A]">{title}</h2>
+      </div>
+      <div className="space-y-4 text-[15px] leading-7 text-[#405071]">{children}</div>
+    </section>
+  );
+}
+
+function Subsection({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <div className="rounded-[16px] border border-[#E6EDF8] bg-[#FBFDFF] p-4">
+      <h3 className="font-['Clash'] text-[17px] text-[#0D1B2A]">{title}</h3>
+      <div className="mt-2 space-y-2">{children}</div>
+    </div>
+  );
+}
+
 export default function PrivacyPolicyPage() {
   return (
-    <LegalPageLayout title="Privacy Policy" lastUpdated="July 7, 2026">
+    <main className="relative overflow-hidden bg-[#F9FBFF] text-[#0D1B2A]">
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(21,101,255,0.045)_1px,transparent_1px),linear-gradient(180deg,rgba(21,101,255,0.045)_1px,transparent_1px)] bg-[size:58px_58px]" />
+      <div className="pointer-events-none absolute left-1/2 top-0 h-[560px] w-[980px] -translate-x-1/2 rounded-full bg-[#DDEEFF]/80 blur-3xl" />
+      <div className="pointer-events-none absolute -right-40 top-32 h-80 w-80 rounded-full bg-[#EAF4FF] blur-3xl" />
 
-      <h2>Introduction</h2>
-      <p>
-        RoyaleCoach AI (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is an independent companion app for Clash Royale players.
-        This Privacy Policy explains what information we collect, how we use it, and your rights
-        regarding your data when you use the RoyaleCoach AI mobile application and website at
-        royalecoachai.com.
-      </p>
-      <p>
-        By using RoyaleCoach AI, you agree to the collection and use of information in accordance
-        with this policy.
-      </p>
+      <section className="relative px-4 pb-8 pt-12 sm:px-6 lg:px-6">
+        <div className="mx-auto grid max-w-[1100px] items-center gap-8 lg:grid-cols-[0.98fr_1.02fr]">
+          <div>
+            <h1 className="font-['Clash'] text-[44px] leading-tight text-[#0D1B2A] sm:text-[60px]">Privacy Policy</h1>
+            <p className="mt-4 text-sm font-semibold text-[#1565FF]">Last Updated: {LAST_UPDATED}</p>
+            <p className="mt-6 max-w-[610px] text-[17px] leading-8 text-[#253753]">
+              This Privacy Policy explains how Veltrix LLC processes information when you use the RoyaleCoach AI app, website, and related services.
+            </p>
+          </div>
 
-      <h2>1. Information We Collect</h2>
+          <div className="flex justify-center lg:justify-end">
+            <Image
+              src="/assets/legal/privacy-king.png"
+              alt="RoyaleCoach AI privacy and personal data protection"
+              width={638}
+              height={409}
+              sizes="(max-width: 1023px) calc(100vw - 32px), 560px"
+              preload
+              className="h-auto w-full max-w-[560px] object-contain drop-shadow-[0_28px_32px_rgba(11,23,48,0.12)]"
+            />
+          </div>
+        </div>
+      </section>
 
-      <h3>a) Player Tag</h3>
-      <p>
-        You provide your Clash Royale player tag (e.g., #ABC123) to use the app. This is used
-        solely to look up your public player data via the official Clash Royale API.
-      </p>
+      <div className="relative mx-auto max-w-[1100px] space-y-6 px-4 pb-12 sm:px-6 lg:px-6">
+        <SectionCard number="1" title="Who We Are" prominent>
+          <p><strong>RoyaleCoach AI is owned and operated by Veltrix LLC</strong>, a Wyoming limited liability company.</p>
+          <p>RoyaleCoach AI is the customer-facing product brand used throughout this Policy.</p>
+        </SectionCard>
 
-      <h3>b) Public Player Data (via Clash Royale API)</h3>
-      <p>
-        We access publicly available player data through the official Clash Royale API operated by
-        Supercell. This includes: current deck, card collection, trophies, clan information, and
-        battle history. We access only the data associated with the player tag you provide.
-      </p>
+        <SectionCard number="2" title="Information We Process">
+          <Subsection title="a) Anonymous Session and Internal Identifier">
+            <p>
+              Users can initially use RoyaleCoach AI through an anonymous session without creating a traditional account. An anonymous internal identifier may be associated with a Clash Royale player tag, app settings, analysis data, usage records, and subscription status.
+            </p>
+          </Subsection>
 
-      <h3>c) Account Data</h3>
-      <p>
-        If you create an account, we may store your email address and a securely hashed password,
-        or link your account to a third-party sign-in provider (Google Sign-In or Apple Sign In).
-        When you use Google Sign-In or Apple Sign In, we receive only the information you authorize
-        (typically your name and email address) and never receive your provider password.
-        We use this to authenticate your session and associate your preferences with your account.
-      </p>
+          <Subsection title="b) Player Tag and Public Player Data">
+            <p>
+              You may provide a Clash Royale player tag. We use it to access available public player information such as decks, cards, trophies, clan information, and battle history for app features and coaching analysis.
+            </p>
+          </Subsection>
 
-      <h3>d) Subscription Data</h3>
-      <p>
-        Subscription purchases are managed through RevenueCat, which communicates with Apple App
-        Store and Google Play on our behalf. We receive only your subscription status (active,
-        expired, or cancelled). We never receive or store your payment card details, billing
-        address, or any other payment information.
-      </p>
+          <Subsection title="c) Linked Authentication Information">
+            <p>
+              Email, Google, or Apple authentication is not required for normal app use or deck analysis. You may be required to link or sign in with one of these methods when purchasing, restoring, or managing a subscription.
+            </p>
+            <p>
+              When you link an account, we may process the email address, provider identifier, provider type, and basic profile information authorized by that provider. RoyaleCoach AI does not ask you to provide your Google or Apple password and does not receive those provider passwords.
+            </p>
+          </Subsection>
 
-      <h3>e) Analytics Data</h3>
-      <p>
-        We collect anonymized usage analytics to understand how the app is used and to improve
-        features. This data does not identify you personally. You may opt out of analytics
-        in the app settings.
-      </p>
+          <Subsection title="d) Subscription Information">
+            <p>
+              Apple App Store and Google Play process subscription purchases. We may receive subscription status, entitlement, product, renewal, expiration, and transaction-reference information needed to provide and support paid features. We do not receive or store payment card details.
+            </p>
+          </Subsection>
 
-      <h3>f) Advertising Data</h3>
-      <p>
-        The free version of RoyaleCoach AI displays advertisements served by Google AdMob. AdMob
-        may use anonymized device identifiers for ad personalization. You can opt out of
-        personalized ads in your device settings. See Google&apos;s privacy policy for details.
-      </p>
+          <Subsection title="e) App Usage, Diagnostics, and Communications">
+            <p>
+              We may process feature usage, analysis history, app settings, device and app version, crash or error information, notification preferences, and support correspondence to operate, secure, troubleshoot, and improve RoyaleCoach AI.
+            </p>
+          </Subsection>
+        </SectionCard>
 
-      <h3>g) Support Communications</h3>
-      <p>
-        If you contact us at support@royalecoachai.com, we retain your email address and
-        correspondence to provide support and improve the app.
-      </p>
+        <SectionCard number="3" title="How We Use Information">
+          <ul className="list-disc space-y-2 pl-5">
+            <li>Provide anonymous sessions and linked account functionality.</li>
+            <li>Load public player information and generate requested coaching analysis.</li>
+            <li>Save app settings, analysis data, and player-specific preferences.</li>
+            <li>Confirm and manage subscription entitlements.</li>
+            <li>Operate, secure, troubleshoot, and improve the Services.</li>
+            <li>Respond to support, privacy, billing, and deletion requests.</li>
+            <li>Prevent fraud, abuse, and unauthorized access.</li>
+            <li>Comply with legal obligations and enforce our agreements.</li>
+          </ul>
+          <p className="rounded-[16px] border border-[#D9E8FF] bg-[#F1F7FF] p-4 font-semibold text-[#0D1B2A]">
+            We do not sell personal information or share it with third parties for their independent marketing purposes.
+          </p>
+        </SectionCard>
 
-      <h3>h) Crash and Error Reports</h3>
-      <p>
-        We collect crash reports and error logs to diagnose and fix technical issues. These reports
-        may include anonymized device information (device model, OS version), app version, and
-        stack traces. Crash reports do not contain your personal data or player tag unless
-        explicitly included in a support request.
-      </p>
+        <SectionCard number="4" title="Advertising">
+          <p>
+            RoyaleCoach AI does not currently use a third-party advertising network in the production app. We do not describe advertising identifiers, ad interaction data, or advertising-network collection as current production behavior.
+          </p>
+          <p>
+            If advertising services are introduced in the future, this Privacy Policy will be updated before or when those services become active.
+          </p>
+        </SectionCard>
 
-      <h3>i) Push Notification Tokens</h3>
-      <p>
-        If you enable push notifications, we store a device push token to deliver coaching alerts
-        and reminders. We do not store the content of notifications on our servers. You can
-        disable notifications at any time in your device settings or within the app.
-      </p>
+        <SectionCard number="5" title="Service Providers">
+          <p>We may use service providers to operate specific parts of RoyaleCoach AI, including:</p>
+          <ul className="list-disc space-y-2 pl-5">
+            <li>Infrastructure and authentication services that support anonymous and linked sessions.</li>
+            <li>Public game-data services used to retrieve information associated with a player tag.</li>
+            <li>Apple App Store, Google Play, and subscription-management services used to process and verify subscriptions.</li>
+            <li>Hosting, diagnostics, notification, security, and support services used to operate the app and website.</li>
+          </ul>
+          <p>Providers receive only the information reasonably necessary to perform services for us and are subject to their own terms and privacy practices.</p>
+        </SectionCard>
 
-      <h3>j) Website Cookies and Tracking</h3>
-      <p>
-        The royalecoachai.com website uses cookies and similar technologies to maintain session
-        state, remember your preferences, and collect anonymized analytics about site usage (e.g.,
-        pages visited, referral source). You can control cookies through your browser settings.
-        We do not use cookies to track you across third-party websites.
-      </p>
+        <SectionCard number="6" title="Data Retention" prominent>
+          <p>
+            We retain information only for as long as reasonably necessary to provide the Services, maintain account and subscription functionality, support users, protect security, prevent fraud, resolve disputes, and comply with legal obligations.
+          </p>
+          <ul className="list-disc space-y-2 pl-5">
+            <li><strong>Anonymous or linked profile data:</strong> Retained while the profile is active and then deleted or anonymized after a valid deletion request, subject to the exceptions below.</li>
+            <li><strong>Subscription and transaction references:</strong> May be retained as needed for billing support, accounting, fraud prevention, disputes, and legal compliance.</li>
+            <li><strong>Support and security records:</strong> Retained for as long as reasonably necessary to resolve the request, protect the Services, or meet legal obligations.</li>
+            <li><strong>Aggregated or de-identified data:</strong> May be retained when it no longer identifies an individual.</li>
+          </ul>
+          <p>
+            Deletion requests are normally completed within 30 days. Previously deleted profile data is not automatically restored if an anonymous user later enters the same player tag, except that legally or operationally required retained records may remain separate from the new profile.
+          </p>
+        </SectionCard>
 
-      <h2>2. How We Use Your Information</h2>
-      <ul>
-        <li>To provide and operate the features of RoyaleCoach AI</li>
-        <li>To authenticate your account and confirm your subscription status</li>
-        <li>To generate personalized AI coaching reports based on your public player data</li>
-        <li>To improve the app based on anonymized usage data</li>
-        <li>To diagnose and fix technical issues using crash and error reports</li>
-        <li>To send coaching alerts and reminders via push notifications (if enabled)</li>
-        <li>To respond to support requests and customer service inquiries</li>
-        <li>To comply with legal obligations</li>
-      </ul>
-      <p>
-        <strong>We do not sell, rent, or share your personal data with third parties for their
-        marketing purposes.</strong>
-      </p>
+        <SectionCard number="7" title="Security and Credentials">
+          <ul className="list-disc space-y-2 pl-5">
+            <li>We use encrypted network connections and reasonable administrative, technical, and organizational safeguards.</li>
+            <li>No password is required for anonymous use.</li>
+            <li>We do not request your Clash Royale password.</li>
+            <li>We do not ask users to send Google or Apple credentials, verification codes, API tokens, or private authentication secrets.</li>
+            <li>No method of storage or transmission is completely secure, so absolute security cannot be guaranteed.</li>
+          </ul>
+        </SectionCard>
 
-      <h2>3. Data Storage and Security</h2>
-      <p>
-        All data is transmitted over HTTPS. Account passwords are hashed using industry-standard
-        algorithms and are never stored in plain text. We apply reasonable technical and
-        organizational measures to protect your data against unauthorized access, loss, or
-        disclosure.
-      </p>
+        <SectionCard number="8" title="Your Choices and Rights">
+          <ul className="list-disc space-y-2 pl-5">
+            <li>Request access to or correction of personal information associated with a linked profile.</li>
+            <li>Delete an anonymous profile through the in-app Delete Account option when available.</li>
+            <li>Request deletion of a linked profile by identifying the email address linked to that profile.</li>
+            <li>Manage notifications through app or device settings.</li>
+            <li>Cancel subscriptions separately through Apple App Store or Google Play.</li>
+            <li>Exercise additional privacy rights available under applicable law.</li>
+          </ul>
+          <p>
+            See the <Link href="/delete-account" className="font-semibold text-[#1565FF] hover:underline">Delete Account</Link> page for detailed instructions. Deleting a RoyaleCoach AI profile does not automatically cancel an Apple or Google subscription.
+          </p>
+        </SectionCard>
 
-      <h2>4. Data Retention</h2>
-      <p>
-        We retain personal information only for as long as necessary to provide the Services,
-        maintain account functionality, improve security, comply with legal obligations, resolve
-        disputes, and enforce our agreements.
-      </p>
-      <ul>
-        <li>
-          <strong>Account data</strong> (email address, linked sign-in provider, player tag) is
-          retained while your account remains active.
-        </li>
-        <li>
-          <strong>Subscription status</strong> received from RevenueCat is retained for the
-          duration of your account and for a reasonable period afterward to handle refund or
-          dispute inquiries.
-        </li>
-        <li>
-          <strong>Crash and error reports</strong> are retained for up to 90 days to allow
-          diagnosis and resolution of technical issues.
-        </li>
-        <li>
-          <strong>Support correspondence</strong> is retained for up to 2 years to provide
-          continuity of support and to fulfill legal or regulatory obligations.
-        </li>
-        <li>
-          <strong>Push notification tokens</strong> are retained while your account is active.
-          Tokens are removed when you delete your account or revoke notification permissions.
-        </li>
-        <li>
-          <strong>Anonymous analytics and aggregated usage statistics</strong> may be retained
-          indefinitely because they no longer identify individual users.
-        </li>
-      </ul>
-      <p>
-        If you delete your account, personal information is permanently deleted or anonymized
-        within 30 days of the deletion request, unless we are legally required to retain certain
-        records. See <Link href="/delete-account">Delete Account</Link> for instructions.
-      </p>
+        <SectionCard number="9" title="Children's Privacy">
+          <p>RoyaleCoach AI is not directed to children under 13, and we do not knowingly collect personal information from children under 13.</p>
+          <p>A parent or guardian can contact us to request review or deletion of information believed to relate to a child.</p>
+        </SectionCard>
 
-      <h2>5. Third-Party Services</h2>
-      <ul>
-        <li><strong>Clash Royale API (Supercell):</strong> Used to access public player data. Subject to Supercell&apos;s terms of service.</li>
-        <li><strong>RevenueCat:</strong> Manages subscription status on behalf of Apple App Store and Google Play. We receive only subscription events; we never receive payment card details.</li>
-        <li><strong>Apple App Store / Google Play:</strong> Process subscription billing. We receive only your subscription status, not payment details.</li>
-        <li><strong>Google AdMob:</strong> Serves advertisements in the free version. Uses anonymized device identifiers.</li>
-        <li><strong>Analytics Provider:</strong> Anonymized usage analytics. No personally identifiable information shared.</li>
-        <li><strong>Crash Reporting:</strong> Anonymized crash and error logs. No personal data or player tag included.</li>
-      </ul>
+        <SectionCard number="10" title="Policy Changes and Contact">
+          <p>We may update this Policy as the Services, legal requirements, or data practices change. The Last Updated date identifies the current version.</p>
+          <p>
+            For privacy questions or requests, email <a href="mailto:support@royalecoachai.com" className="font-semibold text-[#1565FF] hover:underline">support@royalecoachai.com</a>. Veltrix LLC normally responds within 2&ndash;5 business days, although privacy requests may require additional verification or processing time.
+          </p>
+          <p>
+            You may also review our <Link href="/terms-of-service" className="font-semibold text-[#1565FF] hover:underline">Terms of Service</Link> and <Link href="/contact" className="font-semibold text-[#1565FF] hover:underline">Contact page</Link>.
+          </p>
+        </SectionCard>
 
-      <h2>6. Children&apos;s Privacy</h2>
-      <p>
-        RoyaleCoach AI is not directed to children under the age of 13. We do not knowingly collect
-        personal information from children under 13. If you are a parent or guardian and believe your
-        child has provided us with personal information, please contact us at support@royalecoachai.com
-        and we will take steps to remove that information.
-      </p>
-
-      <h2>7. Your Rights</h2>
-      <ul>
-        <li><strong>Access:</strong> Request a copy of the data we hold about you.</li>
-        <li><strong>Correction:</strong> Request correction of inaccurate personal data.</li>
-        <li><strong>Deletion:</strong> Request deletion of your account and associated data. See <Link href="/delete-account">Delete Account</Link> for instructions.</li>
-        <li><strong>Withdrawal of Consent:</strong> Opt out of analytics in app settings or disable push notifications in your device settings.</li>
-        <li><strong>EU/UK residents:</strong> You have the right to lodge a complaint with your local data protection supervisory authority.</li>
-      </ul>
-
-      <h2>8. Data Deletion</h2>
-      <p>
-        You can request deletion of your account and data at any time. See our{' '}
-        <Link href="/delete-account">Delete Account</Link> page for step-by-step instructions.
-        Deletion requests are processed within 30 days. Upon deletion, all personal information
-        is permanently removed or anonymized, except where retention is required by applicable law.
-      </p>
-
-      <h2>9. Changes to This Policy</h2>
-      <p>
-        We may update this Privacy Policy from time to time. We will notify you of significant
-        changes by updating the &quot;Last Updated&quot; date at the top of this page. Continued use of
-        RoyaleCoach AI after changes constitutes your acceptance of the updated policy.
-      </p>
-
-      <h2>10. Contact</h2>
-      <p>
-        For privacy questions or requests, contact us at:{' '}
-        <a href="mailto:support@royalecoachai.com">support@royalecoachai.com</a>
-      </p>
-      <p>
-        RoyaleCoach AI is an independent app and is not affiliated with Supercell Oy.
-        See <Link href="/terms-of-service">Terms of Service</Link> for full terms.
-      </p>
-
-    </LegalPageLayout>
+        <section className="rounded-[22px] border border-[#E6EDF8] bg-white p-6 text-[15px] leading-7 text-[#405071] shadow-[0_16px_38px_rgba(11,23,48,0.08)] md:p-8">
+          <h2 className="font-['Clash'] text-[25px] text-[#0D1B2A]">Independent App Disclaimer</h2>
+          <p className="mt-4">
+            RoyaleCoach AI is an independent companion app and is not affiliated with, endorsed by, sponsored by, or officially connected to Supercell Oy. Clash Royale and related trademarks are the property of Supercell Oy.
+          </p>
+        </section>
+      </div>
+    </main>
   );
 }

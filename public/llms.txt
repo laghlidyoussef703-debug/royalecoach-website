@@ -1,0 +1,34 @@
+# RoyaleCoach AI
+
+RoyaleCoach AI is an independent AI-powered companion app for Clash Royale players. It is owned and operated by Veltrix LLC, a Wyoming limited liability company.
+
+RoyaleCoach AI helps players with deck analysis, deck building, meta deck discovery, battle learning, player statistics, upgrade priorities, and strategy recommendations.
+
+## Main Pages
+
+- Homepage: https://www.royalecoachai.com/
+- Download: https://www.royalecoachai.com/download
+- Pricing: https://www.royalecoachai.com/pricing
+- FAQ: https://www.royalecoachai.com/faq
+- About: https://www.royalecoachai.com/about
+- Contact: https://www.royalecoachai.com/contact
+- Guides: https://www.royalecoachai.com/guides
+
+## Features
+
+- Deck Analysis: https://www.royalecoachai.com/features/deck-analysis
+- Deck Builder: https://www.royalecoachai.com/features/deck-builder
+- Meta Decks: https://www.royalecoachai.com/features/meta-decks
+- Top Battles: https://www.royalecoachai.com/features/top-battles
+- Player Profile: https://www.royalecoachai.com/features/player-profile
+
+## Legal and Support
+
+- Privacy Policy: https://www.royalecoachai.com/privacy-policy
+- Terms of Service: https://www.royalecoachai.com/terms-of-service
+- Delete Account: https://www.royalecoachai.com/delete-account
+- Support: support@royalecoachai.com
+
+## Important Information
+
+RoyaleCoach AI is an independent companion app and is not affiliated with, endorsed by, sponsored by, or officially connected to Supercell Oy. Clash Royale is a trademark of Supercell Oy.
