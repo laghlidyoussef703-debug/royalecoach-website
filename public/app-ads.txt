@@ -1,1 +1,3 @@
-# RoyaleCoach AI does not currently authorize third-party advertising sellers.
+# Authorized advertising sellers for RoyaleCoach AI
+
+vungle.com, 6a5a79e33c546ccd59f55242, DIRECT, c107d686becd2d77
