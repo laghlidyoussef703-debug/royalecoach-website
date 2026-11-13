@@ -1,5 +1,7 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+Cloudflare deployment: read [CLOUDFLARE_DEPLOYMENT.md](./CLOUDFLARE_DEPLOYMENT.md) before configuring hosting. This application currently requires request-time rendering and cannot be uploaded to Pages as a static export. The guide includes the compatibility audit, preserved SEO behavior, validation commands, and Workers migration recommendations.
+
 ## Getting Started
 
 First, run the development server:
