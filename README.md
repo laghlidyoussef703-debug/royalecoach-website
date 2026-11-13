@@ -1,6 +1,6 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-Cloudflare deployment: read [CLOUDFLARE_DEPLOYMENT.md](./CLOUDFLARE_DEPLOYMENT.md) before configuring hosting. This application currently requires request-time rendering and cannot be uploaded to Pages as a static export. The guide includes the compatibility audit, preserved SEO behavior, validation commands, and Workers migration recommendations.
+Cloudflare Workers: vinext is configured alongside the original Next.js workflow. Use Node 24.22.0, then `npm ci`, `npm run build:vinext`, and `npm run start:vinext`. Read [CLOUDFLARE_DEPLOYMENT.md](./CLOUDFLARE_DEPLOYMENT.md) for the exact configuration, SEO checks, approved image optimization, and deployment commands. Production has not been deployed or connected; this dynamic application cannot be uploaded to Pages as a static export.
 
 ## Getting Started
 

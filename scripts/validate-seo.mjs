@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { readFile, readdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
+import { parseFragment } from 'parse5';
+import { isDeepStrictEqual } from 'node:util';
 
 // Run against `next start` or a Workers preview; never sends referral POSTs.
 const origin = process.env.SEO_TEST_ORIGIN || 'http://127.0.0.1:3100';
@@ -14,6 +16,39 @@ const links = new Set();
 const snapshot = {};
 const decode = (value) => value.replaceAll('&amp;', '&').replaceAll('&#x27;', "'").replaceAll('&quot;', '"');
 const attrs = (tag) => Object.fromEntries([...tag.matchAll(/([\w:-]+)="([^"]*)"/g)].map((m) => [m[1].toLowerCase(), decode(m[2])]));
+// Compare DOM meaning across renderers, retaining text, classes, links, image
+// sources/dimensions and layout styles. Attribute/tag ordering is not content.
+function mainTree(html) {
+  function visit(node) {
+    if (node.nodeName === '#comment') return null;
+    if (node.nodeName === '#text') return node.value.replace(/\s+/g, ' ').trim();
+    const attributes = (node.attrs || []).filter((a) => a.name !== 'data-nimg' && !(node.nodeName === 'img' && (a.name === 'fetchpriority' || (a.name === 'loading' && a.value === 'eager')))).map(({ name, value }) => {
+      if (name === 'style') value = value.split(';').map((v) => v.trim()).filter(Boolean).filter((v) => !(node.nodeName === 'img' && /^color:\s*transparent$/.test(v))).sort().join(';');
+      return [name, value];
+    }).filter(([name, value]) => name !== 'style' || value).sort(([a], [b]) => a.localeCompare(b));
+    return [node.nodeName, attributes, (node.childNodes || []).map(visit).filter((n) => n !== null)];
+  }
+  return visit(parseFragment(html));
+}
+function comparableSnapshot(input) {
+  return Object.fromEntries(Object.entries(input).map(([route, value]) => {
+    if (!route.startsWith('/')) return [route, value];
+    return [route, {
+      ...value,
+      // This internal next/font sizing marker is not SEO metadata.
+      meta: value.meta.filter((m) => m.name !== 'next-size-adjust').sort((a, b) => `${a.name || a.property}:${a.content}`.localeCompare(`${b.name || b.property}:${b.content}`)),
+      main: mainTree(value.main),
+    }];
+  }));
+}
+function assertSame(actual, expected, label = '$') {
+  if (isDeepStrictEqual(actual, expected)) return;
+  if (actual && expected && typeof actual === 'object' && typeof expected === 'object') {
+    const keys = [...new Set([...Object.keys(actual), ...Object.keys(expected)])];
+    for (const key of keys) assertSame(actual[key], expected[key], `${label}.${key}`);
+  }
+  throw new Error(`${label}: ${JSON.stringify(actual)?.slice(0, 180)} differs from ${JSON.stringify(expected)?.slice(0, 180)}`);
+}
 async function check(label, fn) {
   try { await fn(); } catch (error) { failures.push(`${label}: ${error.message}`); }
 }
@@ -123,7 +158,7 @@ await check('unknown guide', async () => assert.equal((await get('/guides/not-a-
 await check('unknown page', async () => assert.equal((await get('/not-a-real-page')).status, 404));
 if (snapshotFile) {
   if (capture) await writeFile(snapshotFile, JSON.stringify(snapshot, null, 2) + '\n');
-  else await check('SEO/content baseline', async () => assert.deepEqual(snapshot, JSON.parse(await readFile(snapshotFile, 'utf8'))));
+  else await check('SEO/content baseline', async () => assertSame(comparableSnapshot(snapshot), comparableSnapshot(JSON.parse(await readFile(snapshotFile, 'utf8')))));
 }
 console.log(JSON.stringify({ origin, pages: routes.length, sitemapUrls: sitemapUrls.length, internalLinks: links.size, assets: assets.size, failures }, null, 2));
 if (failures.length) process.exitCode = 1;

@@ -546,7 +546,7 @@ export default function InvitePage({
             }),
           },
         );
-        const data = await res.json();
+        const data = await res.json() as { ok?: boolean; token?: string } | null;
         if (data?.ok && data.token) {
           token = data.token;
         }
